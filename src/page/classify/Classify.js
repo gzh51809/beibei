@@ -162,6 +162,7 @@ class Classify extends Component {
             return false;
         }
 
+        // 加载状态
         if(!this.state.isLoadData){
             return false;
         }

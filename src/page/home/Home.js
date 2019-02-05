@@ -8,6 +8,8 @@ class Footer extends React.Component {
     super(props);
     this.props = props;
     this.state = {
+      // 加载状态
+      isLoadData: true,
       display: 'none',
       page: 1,
       saleGoods1: '',
@@ -97,6 +99,10 @@ class Footer extends React.Component {
   }
   // 触底获取数据==
   getList() {
+    if(!this.state.isLoadData){
+      return false;
+  }
+
     axios.get(`/martshow/v1/7702-${this.state.page}-all-0-1-0-12.html?client_info=undefined&h5_uid=undefined`)
       // https://dsapi.beibei.com/martshow/v1/7702-3-all-0-1-0-15.html?client_info=undefined&h5_uid=undefined
       .then((res) => {
@@ -116,6 +122,9 @@ class Footer extends React.Component {
           // console.log(this.state.page);
           // console.log(res.data.martshows);
         // }
+        this.setState({
+          isLoadData: false
+      })
 
       })
       .catch((err) => {
