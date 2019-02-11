@@ -61,9 +61,9 @@ class Footer extends React.Component {
     var totalHeight = window.innerHeight * 1 + window.pageYOffset * 1;
     var trueHeight = document.documentElement.scrollHeight - 100;
     if (totalHeight >= trueHeight) {
-      console.log('触底了', this.state.newList);
+      // console.log('触底了', this.state.newList);
       this.getList();
-      if (this.state.page == 5) {
+      if (this.state.page === 5) {
         return false;
         // this.state.newList = this.state.newList;
       }
@@ -73,6 +73,7 @@ class Footer extends React.Component {
     // console.log(totalHeight, 111111, trueHeight);
     // console.log(document.documentElement.scrollHeight,'全部');
   }
+  // toTop返回顶部==
   toTop(){
     if(window.scrollY >= 390){
       this.setState({
@@ -122,6 +123,8 @@ class Footer extends React.Component {
           // console.log(this.state.page);
           // console.log(res.data.martshows);
         // }
+
+        //加载状态 
         this.setState({
           isLoadData: false
       })

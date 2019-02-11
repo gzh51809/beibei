@@ -1,0 +1,66 @@
+@import './base.less'; 
+.sale{
+    .tabCon{
+        position: fixed;
+        top: 0;
+        overflow: auto;
+        width: 100%;
+        background: linear-gradient(90deg,#ff5e00 1%,#ff1a1a);
+        ul{
+            .margin(0,0,0,20);
+            .w(1200);
+            .h(145);
+            li{
+                opacity: .3;
+                float: left;
+                .margin(0,52,0,36);
+                .fs(14);
+                .icon{
+                    .w(50);
+                    .h(50);
+                    .margin(15,0,0,0);
+
+                }
+                p{
+                    .margin(10,0,0,0);
+                }
+            }
+            .active{
+                opacity: 1;
+            }
+        }
+    }
+    //  去除滚动条样式
+    .tabCon::-webkit-scrollbar {
+        display: none;
+    }
+    .active{
+        border-bottom: 2px solid red;
+    }
+    .goodsList{
+        .margin(145,0,0,0);
+        li{
+            display: block;
+            color: #000;
+            width: 48%;
+            float: left;
+            .padding(15,8,8,8);
+            img{
+                .w(400);
+                .h(373);
+            }
+            p{
+                .h(39);
+                .padding(16,0,0,0);
+                overflow: hidden;
+            }
+            span{
+                display: inline-block;
+                .padding(16,0,20,0);
+            }
+            .fontColor{
+                color: red;
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+@import './base.less'; 
+.userCart{
+    div{
+        ul{
+            width: 100%;
+            height: 100%;
+            li{
+                .h(250);
+
+                .padding(20,20,20,20);
+                img{
+                    .margin(25,0,10,0);
+                    width: 15%;
+                    // .w(200);
+                    .h(130);
+                    float: left;
+                }
+                div{
+                    width: 70%;
+                    float: left;
+                    p{
+                        .lh(50);
+                        .padding(10,10,10,30);
+                        .h(95);
+                        overflow: hidden;
+
+                    }
+                    .price{
+                        color: red;
+                        float: left;
+                    }
+                    span{
+                        float: right;
+                        .padding(6,10,10,30);
+                    }
+                }
+                .delGoods{
+                    text-align: right;
+                    float: right;
+                    width: 10%;
+                }
+            }
+        }
+    }
+}

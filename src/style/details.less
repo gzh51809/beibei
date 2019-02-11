@@ -1,14 +1,74 @@
-.my-drawer {
-    position: relative;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+@import './base.less'; 
+.details{
+  // .padding(24,24,24,24);
+  div{
+    .padding(24,24,24,24);
+    // height: 100%;
+    // width: 100%;
+    img{
+      .h(750);
+      width: 100%;
+    }
+    p{
+      .padding(20,0,20,0);
+      .fs(40);
+    }
+    .fontColor{
+      color: red;
+    }
+    .text{
+      display: inline-block;
+      .margin(0,0,20,0);
+      .fs(30);
+      color: #666;
+    }
+
   }
-  .my-drawer .am-drawer-sidebar {
-    background-color: #fff;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+  .buyQty{
+    .h(80);
+    width: 94%;
+      .floatLeft{
+      float: left;
+    }
+    .floatRight{
+      float: right;
+      span{
+        .padding(10,15,10,15);
+        border: 1px solid #ccc;
+      }
+    }
   }
-  .my-drawer .am-drawer-sidebar .am-list {
-    width: 300px;
+  .box{
     padding: 0;
+    width: 100%;
+    .h(50);
+    background: #ccc;
   }
+  .buy{
+    position: fixed;
+    bottom: 0;
+    // z-index: inherit;
+    border: 1px solid rgba(0,0,0,.08);
+    padding: 0;
+    .h(100);
+    // height: 100%;;
+    // height: 100px;
+    div{
+      float: left;
+      .padding(0,51.5,0,51.5);
+      .lh(100);
+      // text-align: left;
+    }
+    .buyNow{
+      color: #fff;
+      background: #ff2436;
+    }
+    .addCart{
+      color: #fff;
+      background: #000;
+    }
+    .homeBtn{
+      border-right: 1px solid rgba(0,0,0,.08);
+    }
+  }
+}

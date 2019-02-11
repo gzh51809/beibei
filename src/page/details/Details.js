@@ -1,121 +1,158 @@
-import React, { Component } from 'react';
+import React from "react";
 import '../../style/details.less';
-import { Drawer, List, NavBar, Icon } from 'antd-mobile';
-import {connect} from 'react-redux';
+// import axios from 'axios'
+import { connect, ReactReduxContext } from 'react-redux';
 
 
 class Details extends React.Component {
-  state = {
-    open: false,
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.state = {
+      goods: {},
+      qty: 1
+    }
   }
-    // handleRemove(id){
-    //     this.props.dispatch({
-    //         type:'REMOVE_FROM_CART',
-    //         payload:{id}
-    //     })
-    // }
+  // static contextType = ReactReduxContext;
+  // 数量增加==
+  addQty() {
+    this.setState({
+      qty: this.state.qty + 1
+    })
+  }
+  // 数量减少==
+  reduceQty() {
+    if (this.state.qty <= 1) {
+      return false;
+    }
+    this.setState({
+      qty: this.state.qty - 1
+    })
+  }
+  // 首页==
+  goHome(){
+    this.props.history.push({pathname: '/home'})
+  }
+  // 购物车页面==
+  goCart(){
+    this.props.history.push({pathname: '/userCart'});
+  }
+  // 添加到购物车==
+  addCart(goods) {
+    console.log(goods)
+    goods = {
+      id: goods.iid,
+      title: goods.desc,
+      price: goods.beiji_cms_desc,
+      img: goods.img,
+      qty: this.state.qty
+    }
+    this.props.dispatch({
+      type: 'addCart',
+      payload: goods
+    })
+    // setTimeout(() => {
+    //   console.log(this.props.goodslist, '1111111111111')
+    // }, 500)
+  }
+  componentWillMount() {
+    // console.log(this.props)
+    this.props.dispatch({
+      type: 'toggleNav',
+      payload: true
+    })
 
-  onOpenChange = (...args) => {
-      console.log(11111111)
-    console.log(args);
-    this.setState({ open: !this.state.open });
+    // setTimeout(() => {
+    //   console.log(this.props.isShowNav, '1111111111111')
+    // }, 5000)
+
+    var getGoods = JSON.parse(sessionStorage.getItem('goods'));
+    // console.log(getGoods);
+    this.setState({
+      goods: getGoods
+    }, (() => {
+      console.log(this.state.goods)
+    }))
+
+    // axios.get(`/mroute/mroute.html?method=beibei.module.pintuan.recom.list.get&scene_id=app_item_detail_buy_recom&iid=${this.state.goods.iid}&event_id=${this.state.goods.event_id}&uid=0`)
+    // .then((res)=>{
+    //   console.log(res.data.recom_items);
+    // })
+    // .catch((err)=>{
+    //   console.log(err);
+    // })
+  }
+  componentWillUnmount() {
+    this.props.dispatch({
+      type: 'toggleNav',
+      payload: false
+    })
   }
   render() {
-    // fix in codepen
-    const sidebar = (<List>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,].map((i, index) => {
-        if (index === 0) {
-          return (<List.Item key={index}
-            thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
-            multipleLine
-          >Category</List.Item>);
-        }
-        return (<List.Item key={index}
-          thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
-        >Category{index}</List.Item>);
-      })}
-    </List>);
+    let { title, iid, event_id, img, beiji_cms_prefix, beiji_cms_desc, sub_desc } = this.state.goods;
+    return (
+      <div className="details">
+        <div>
+          <img src={img} alt="" />
+          <p>{title}</p>
+          {
+            sub_desc.map((item, index) => {
+              return <span key={index} className="text">{item}</span>
+            })
+          }
+          <div><span></span><span className="fontColor">{beiji_cms_prefix}{beiji_cms_desc}</span></div>
+        </div>
+        <div className="box"></div>
+        <div className="buyQty">
+          <div className="floatLeft">购买数量</div>
+          <div className="floatRight">
+            <span onClick={(() => { this.reduceQty() })}>-</span>
+            <span>{this.state.qty}</span>
+            <span onClick={(() => { this.addQty() })}>+</span>
+          </div>
+        </div>
+        <div className="buy">
+          <div className="homeBtn" onClick={(()=>{this.goHome()})}>首页</div><div className="cartBtn" onClick={this.goCart.bind(this)}>购物车</div><div className="addCart" onClick={(()=>{this.addCart(this.state.goods)})}>加入购物车</div><div className="buyNow">立即购买</div>
 
-    return (<div>
-      <NavBar icon={<Icon type="ellipsis" />} onLeftClick={this.onOpenChange}>Basic</NavBar>
-      <Drawer
-        // className="my-drawer"
-        style={{ minHeight: document.documentElement.clientHeight }}
-        // enableDragHandle
-        contentStyle={{ color: '#A6A6A6', textAlign: 'center', paddingTop: 42 }}
-        sidebar={sidebar}
-        open={this.state.open}
-        
-        onOpenChange={this.onOpenChange}
-        position='right'
-      >
-        Click upper-left corner
-      </Drawer>
-    </div>);
+        </div>
+
+      </div>
+
+    );
   }
 }
 
 
-// export default connect((state)=>{
-// 	return state						
-// 	return {						
-// 		handleRemove(src){
-// 			console.log(src)
-// 			dispatch({
-// 				type:"toggleGallery",
-// 				isShowGallery:{
-// 					bool: !this.props.isShowGallery.bool,
-//         			src
-// 				}
-// 			})
-// 		}
-// 	}
-// })(Details)
+// 1(全局)dispatch默认映射到this.props,把state映射到this.props，便于全局中使用
+let mapStateToProps = (state) => {
+  // console.log('mapStateToProps:', state)
+  return {
+    ...state
+    // 把goodslist属性映射到App的props中
+    // goodslist:state.cart.goodslist,
+    // price:state.goods.price
+  }
+}
 
-// const mapStateToProps = state=>{
+
+// 2（局部）在当前使用dispatch
+// let mapDispatchToProps = (dispatch)=>{
+//   // console.log(dispatch,'dis')
 //     return {
-//         goodslist:state.cart.goodslist
-//     }
-// }
-// const mapDispatchToProps = dispatch=>{
-//     return {
-//         remove(id){
+//         addcart:()=>{
 //             dispatch({
-//                 type:"toggleGallery",
-//                 isShowGallery:{
-//                     bool: !this.props.isShowGallery.bool,
-//                     src
-//                 }
+//                 type:'toggleNav',
+//                 payload:1111
 //             })
-//         },
-//         // changeQty(id,qty){
-//         //     dispatch(cartAction.changeQty(id,qty))
-//         // },
-//         // clear(){
-//         //     dispatch(cartAction.clear())
-//         // }
+//             // console.log(111111111,this.props)
+//         }
 //     }
 // }
+// Details = connect(mapStateToProps,mapDispatchToProps)(Details);
 
-let mapStateToProps = (state)=>{
-    console.log('mapStateToProps:',state)
-    return {
-        // 把goodslist属性映射到App的props中
-        // goodslist:state.cart.goodslist,
-        // price:state.goods.price
-    }
-}
 
-let mapDispatchToProps = (dispatch)=>{
-    return {
-        addcart:(goods)=>{
-            dispatch({
-                type:'ADD_TO_CART',
-                payload:goods
-            })
-        }
-    }
-}
-Details = connect(mapStateToProps,mapDispatchToProps)(Details);
+Details = connect(mapStateToProps)(Details);
+
 
 export default Details;
+
