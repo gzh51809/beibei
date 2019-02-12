@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect,withRouter } from "react-router-dom";
 // 引入withRouter获取history进行tab跳转
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 // antd插件
 import { TabBar } from 'antd-mobile';
 // less
-import './style/app.less'
+import './style/app.less';
+
+import {connect,ReactReduxContext} from 'react-redux';
 
 
 import Home from './page/home/Home.js';
@@ -15,6 +17,8 @@ import Activity from './page/activity/Activity.js';
 import Cart from './page/cart/Cart.js';
 import Details from './page/details/Details.js'
 import Classify from './page/classify/Classify.js';
+import userCart from './page/cart/userCart.js';
+
 
 
 // import Classify from './pages/classify/classify.jsx';
@@ -51,6 +55,7 @@ return data
   Toast.hide();
 return Promise.reject(error)
 })
+
 
 
 
@@ -92,12 +97,15 @@ class App extends Component {
       }]
     };
   }
+  static contextType = ReactReduxContext;
 
-  // shouldComponentUpdate(prevPorps,nextState){
 
+  // componentWillMount(){
+  //   console.log(this.props,'666666666')
   // }
 
   render() {
+    // console.log(this.props)
     return (
       <div className="App">
         {/* <Redirect exact from='/' to='/home/' /> */}
@@ -106,8 +114,9 @@ class App extends Component {
           <Route path="/sale" component={Sale} />
           <Route path="/activity" component={Activity} />
           <Route path="/cart" component={Cart} />
+          <Route path="/userCart" component={userCart} />
           <Route path="/mine" component={Mine} />
-          <Route path="/details/:id" component={Details} />
+          <Route path="/details" component={Details} />
           <Route path="/classify/:name/:type/:idx" component={Classify} />
 
 
@@ -119,7 +128,8 @@ class App extends Component {
           {/* <Route path="/detailsimg/:id" component={Detailsimg} /> */}
           {/* <Route path="/evaluate/:id" component={Evaluate} /> */}
           {/* <Route path="/goodslist/:id" component={GoodsList} /> */}
-          {/* <Redirect to="/home/"/> */}
+          {/* <Redirect to="/home"/> */}
+          {/* <Redirect from="/" to="/home"/> */}
           <Redirect from="/" to="/home"/>
         </Switch>
 
@@ -129,9 +139,8 @@ class App extends Component {
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
           barTintColor="white"
-          hidden={this.state.hidden}
+          hidden={this.props.showNav.isShowNav}
         >
-
           {
             (() => {
               return this.state.tabCon.map((item, index) => {
@@ -175,7 +184,34 @@ class App extends Component {
     );
   }
 }
-App = withRouter(App)
+
+let mapStateToProps = (state)=>{
+  // console.log(this.props,'map')
+    // console.log('mapStateToProps:',state)
+    return {
+      ...state
+        // 把goodslist属性映射到App的props中
+        // goodslist:state.cart.goodslist,
+        // price:state.goods.price
+    }
+}
+
+let mapDispatchToProps = (dispatch)=>{
+    return {
+        addcart:(goods)=>{
+            dispatch({
+                type:'ADD_TO_CART',
+                payload:goods
+            })
+        }
+    }
+}
+// let a = withRouter(App);
+// App = withRouter(App)
+// App = connect(mapStateToProps,mapDispatchToProps)(a)
+// App = connect(mapStateToProps,mapDispatchToProps)(App);
+App = withRouter(connect(mapStateToProps,mapDispatchToProps)(App))
+
 export default App;
 
 // // ReactDOM.render(<TabBarExample />, mountNode);

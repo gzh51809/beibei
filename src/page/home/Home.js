@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../../style/home.less';
 import axios from 'axios';
 import { Link } from "react-router-dom"
@@ -61,9 +61,9 @@ class Footer extends React.Component {
     var totalHeight = window.innerHeight * 1 + window.pageYOffset * 1;
     var trueHeight = document.documentElement.scrollHeight - 100;
     if (totalHeight >= trueHeight) {
-      console.log('触底了', this.state.newList);
+      // console.log('触底了', this.state.newList);
       this.getList();
-      if (this.state.page == 5) {
+      if (this.state.page === 5) {
         return false;
         // this.state.newList = this.state.newList;
       }
@@ -73,6 +73,7 @@ class Footer extends React.Component {
     // console.log(totalHeight, 111111, trueHeight);
     // console.log(document.documentElement.scrollHeight,'全部');
   }
+  // toTop返回顶部==
   toTop(){
     if(window.scrollY >= 390){
       this.setState({
@@ -106,7 +107,7 @@ class Footer extends React.Component {
     axios.get(`/martshow/v1/7702-${this.state.page}-all-0-1-0-12.html?client_info=undefined&h5_uid=undefined`)
       // https://dsapi.beibei.com/martshow/v1/7702-3-all-0-1-0-15.html?client_info=undefined&h5_uid=undefined
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         var data = res.data.martshows;
         if (this.state.page <= 5) {
           this.setState({
@@ -122,6 +123,8 @@ class Footer extends React.Component {
           // console.log(this.state.page);
           // console.log(res.data.martshows);
         // }
+
+        //加载状态 
         this.setState({
           isLoadData: false
       })
@@ -150,7 +153,7 @@ class Footer extends React.Component {
         this.setState({
           saleGoods: imgs
         })
-        console.log(res.data.promotion_pro_shortcuts)
+        // console.log(res.data.promotion_pro_shortcuts)
       })
       .catch((err) => {
         console.log(err);
@@ -208,7 +211,7 @@ class Footer extends React.Component {
                 // <li key={index} onClick={(()=>{this.goDetails(item.type_home_item_single.iid)})}>
                 //  <Link to={{pathname: '/cart',state:{id: item.type_home_item_single.iid}}}>
                 <Link key={index} to={`/details/${item.type_home_item_single.iid}`}>
-                  <img src={item.type_home_item_single.img} />
+                  <img src={item.type_home_item_single.img} alt=""/>
                   <div>
                     <p>{item.type_home_item_single.title}</p>
                     <p>{item.type_home_item_single.promotion_desc}</p>
