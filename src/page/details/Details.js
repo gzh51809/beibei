@@ -1,13 +1,8 @@
 import React from "react";
 import '../../style/details.less';
 // import axios from 'axios'
-<<<<<<< HEAD
 import { connect } from 'react-redux';
 import cartAction from '../../actions/cartAction';
-=======
-import { connect, ReactReduxContext } from 'react-redux';
-
->>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
 
 class Details extends React.Component {
   constructor(props) {
@@ -33,7 +28,6 @@ class Details extends React.Component {
     this.setState({
       qty: this.state.qty - 1
     })
-<<<<<<< HEAD
   }
   // 首页==
   goHome(){
@@ -93,75 +87,12 @@ class Details extends React.Component {
   componentWillUnmount() {
     this.props.dispatch({
       type: 'TOGGLE_NAV',
-=======
-  }
-  // 首页==
-  goHome(){
-    this.props.history.push({pathname: '/home'})
-  }
-  // 购物车页面==
-  goCart(){
-    this.props.history.push({pathname: '/userCart'});
-  }
-  // 添加到购物车==
-  addCart(goods) {
-    console.log(goods)
-    goods = {
-      id: goods.iid,
-      title: goods.desc,
-      price: goods.beiji_cms_desc,
-      img: goods.img,
-      qty: this.state.qty
-    }
-    this.props.dispatch({
-      type: 'addCart',
-      payload: goods
-    })
-    // setTimeout(() => {
-    //   console.log(this.props.goodslist, '1111111111111')
-    // }, 500)
-  }
-  componentWillMount() {
-    // console.log(this.props)
-    this.props.dispatch({
-      type: 'toggleNav',
-      payload: true
-    })
-
-    // setTimeout(() => {
-    //   console.log(this.props.isShowNav, '1111111111111')
-    // }, 5000)
-
-    var getGoods = JSON.parse(sessionStorage.getItem('goods'));
-    // console.log(getGoods);
-    this.setState({
-      goods: getGoods
-    }, (() => {
-      console.log(this.state.goods)
-    }))
-
-    // axios.get(`/mroute/mroute.html?method=beibei.module.pintuan.recom.list.get&scene_id=app_item_detail_buy_recom&iid=${this.state.goods.iid}&event_id=${this.state.goods.event_id}&uid=0`)
-    // .then((res)=>{
-    //   console.log(res.data.recom_items);
-    // })
-    // .catch((err)=>{
-    //   console.log(err);
-    // })
-  }
-  componentWillUnmount() {
-    this.props.dispatch({
-      type: 'toggleNav',
->>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
       payload: false
     })
   }
   render() {
-<<<<<<< HEAD
     // let {remove,changeQty,goodslist,clear,add} = this.props;
     let { title, img, beiji_cms_prefix, beiji_cms_desc, sub_desc } = this.state.goods;
-=======
-    let { title, iid, event_id, img, beiji_cms_prefix, beiji_cms_desc, sub_desc } = this.state.goods;
->>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
     return (
       <div className="details">
         <div>
@@ -184,14 +115,10 @@ class Details extends React.Component {
           </div>
         </div>
         <div className="buy">
-<<<<<<< HEAD
           <div className="homeBtn" onClick={(()=>{this.goHome()})}>首页</div>
           <div className="cartBtn" onClick={this.goCart.bind(this)}>购物车</div>
           <div className="addCart" onClick={(()=>{this.add(this.state.goods)})}>加入购物车</div>
           <div className="buyNow">立即购买</div>
-=======
-          <div className="homeBtn" onClick={(()=>{this.goHome()})}>首页</div><div className="cartBtn" onClick={this.goCart.bind(this)}>购物车</div><div className="addCart" onClick={(()=>{this.addCart(this.state.goods)})}>加入购物车</div><div className="buyNow">立即购买</div>
->>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
 
         </div>
 

@@ -98,29 +98,10 @@ class App extends Component {
     };
   }
   static contextType = ReactReduxContext;
-<<<<<<< HEAD
 
 
   // componentWillMount(){
   //   console.log(this.props,'666666666')
-=======
-
-
-  // componentWillMount(){
-  //   // })
-  //       //  this.props.dispatch({
-  //       //     type:'toggleNav',
-  //       //     payload: true
-      
-  //       //   // console.log(this.props
-  //       // })
-  //   console.log(this.props.isShowNav,'666666666')
-  // }
-
-  // shouldComponentUpdate(prevPorps,nextState){
-  //   console.log(this.props,'should')
-  //   return true;
->>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
   // }
   render() {
     // console.log(this.props)
@@ -157,11 +138,7 @@ class App extends Component {
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
           barTintColor="white"
-<<<<<<< HEAD
           hidden={this.props.showNav.isShowNav}
-=======
-          hidden={this.props.isShowNav}
->>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
         >
           {
             (() => {
