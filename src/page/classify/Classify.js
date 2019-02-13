@@ -108,19 +108,30 @@ class Classify extends Component {
     }
     // 获取数据==
     getData() {
+<<<<<<< HEAD
         // console.log(this.props.match.params.type)
+=======
+        console.log(this.props.match.params.type)
+>>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
         // =========================================================================
         if (this.props.match.params.type) {
             var currentType = this.props.match.params.type;
             // var currentId = this.props.match.params.idx;
+<<<<<<< HEAD
             // console.log(5555555)
+=======
+            console.log(5555555)
+>>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
             this.setState({
                 // goodsList: [],
                 // selectedIdx: currentId,
                 type: currentType
             }
+<<<<<<< HEAD
             // ,()=>{console.log(this.state.type,currentType,'yyyyyyyyyyyyyyyyyy')}
 
+=======
+>>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
             // , () => {
             //     axios.get(`/martshow/home/channel/7702-${this.state.page}-${this.state.type}-1000.html?client_info=undefined&h5_uid=undefined`)
             //         .then((res) => {
@@ -152,7 +163,11 @@ class Classify extends Component {
             //     })
             // }
         )
+<<<<<<< HEAD
             // console.log(111, currentType)
+=======
+            console.log(111, currentType)
+>>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
         }
         if (this.state.page === 8) {
             console.log(111)
@@ -164,6 +179,10 @@ class Classify extends Component {
             return false;
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
         // console.log(this.state.page,'aaaaaaaaaaaaa')
         // console.log(this)
         // console.log(currentType, this.state.type,111)
@@ -238,7 +257,7 @@ class Classify extends Component {
                                 return (
                                     <li
                                         key={index}
-                                        className={this.state.selectedIdx == item.idx ? 'active' : ''}
+                                        className={this.state.selectedIdx === item.idx ? 'active' : ''}
                                         onClick={() => {
                                             this.setState({
                                                 selectedIdx: item.idx,

@@ -1,7 +1,11 @@
 import React from "react";
 import '../../style/sale.less';
 import axios from 'axios';
+<<<<<<< HEAD
 // import { Link } from "react-router-dom"
+=======
+import { Link } from "react-router-dom"
+>>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
 
 class Mheader extends React.Component {
   constructor(props) {
@@ -51,7 +55,11 @@ class Mheader extends React.Component {
     if(!this.state.isLoadData){
       return false;
     }
+<<<<<<< HEAD
     if(this.state.page===8){
+=======
+    if(this.state.page==8){
+>>>>>>> 663d66cbe7d87f35f59b7d300fcaa504f53220b0
       return false;
     }
     axios.get(`/martgoods/low_price/discover/${this.state.page}-30-.html?cat=${this.state.type}&h5_uid=null`)
